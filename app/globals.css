@@ -24,7 +24,7 @@
 
   --font-mona-sans: "Mona Sans", sans-serif;
 
-  --bg-pattern: url("/pattern.png");
+  /* --bg-pattern: url("/patternjn.png"); */
 }
 
 :root {
@@ -63,7 +63,7 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: oklch(0.9 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -139,10 +139,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
   p {
-    @apply text-light-100;
+    @apply text-dark-100;
   }
   h2 {
     @apply text-3xl font-semibold;
@@ -154,11 +154,19 @@
     @apply list-disc list-inside;
   }
   li {
-    @apply text-light-100;
+    @apply text-dark-100;
   }
 }
 
 @layer components {
+  .video-container {
+    @apply fixed top-0 left-0 w-full h-full z-[-1] overflow-hidden;
+  }
+
+  .bg-video {
+    @apply w-full h-full object-cover;
+  }
+
   .btn-call {
     @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white transition-colors duration-150 bg-success-100 border border-transparent rounded-full shadow-sm focus:outline-none focus:shadow-2xl active:bg-success-200 hover:bg-success-200 min-w-28 cursor-pointer items-center justify-center overflow-visible;
 
@@ -201,7 +209,7 @@
     }
 
     .input {
-      @apply !bg-dark-200 !rounded-full !min-h-12 !px-5 placeholder:!text-light-100;
+      @apply !bg-dark-200 !rounded-full !min-h-12 !px-5 placeholder:!text-dark-100;
     }
 
     .btn {
@@ -244,7 +252,7 @@
       @apply dark-gradient rounded-2xl  min-h-12 px-5 py-3 flex items-center justify-center;
 
       p {
-        @apply text-lg text-center text-white;
+        @apply text-lg text-center text-black;
       }
     }
   }
@@ -258,11 +266,11 @@
   }
 
   .auth-layout {
-    @apply flex items-center justify-center mx-auto max-w-7xl min-h-screen max-sm:px-4 max-sm:py-8;
+    @apply flex items-center justify-center mx-auto max-w-7xl min-h-screen max-sm:px-4 max-sm:py-8 text-black;
   }
 
   .root-layout {
-    @apply flex mx-auto max-w-7xl flex-col gap-12 my-12 px-16 max-sm:px-4 max-sm:my-8;
+    @apply flex items-center justify-center mx-auto max-w-7xl min-h-screen max-sm:px-4 max-sm:py-8 text-black;
   }
 
   .card-cta {
@@ -330,5 +338,106 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Ball styles */
+.ball {
+  animation: bounce 2s ease-out forwards;
+  transform-origin: bottom center;
+}
+
+/* Eye styles */
+.eye-container {
+  transition: transform 0.2s ease-out;
+  transform-origin: center;
+}
+
+.eye {
+  transition: transform 0.3s ease-out;
+}
+
+/* Blinking animation */
+@keyframes random-blink {
+  0%,
+  85% {
+    transform: scaleY(1);
+  }
+  87%,
+  93% {
+    transform: scaleY(0.05);
+  }
+  95%,
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.clip-path-mouth {
+  clip-path: polygon(100% 50%, 100% 100%, 0 100%, 0 50%);
+}
+
+.ball.sad .eye_wrap:first-child {
+  clip-path: polygon(67% 0, 100% 0, 100% 50%, 100% 100%, 0 100%, 0% 50%);
+}
+
+.ball.sad .eye_wrap:last-child {
+  clip-path: polygon(0 0, 43% 0, 100% 50%, 100% 100%, 0 100%, 0% 50%);
+}
+
+.ball.sad .ball__mouth {
+  transform: scaleY(-1.05);
+}
+
+/* Checkbox styles */
+input[type="checkbox"]:checked + span svg {
+  transform: scale(1) !important;
+}
+
+input[type="checkbox"]:focus + span {
+  border-color: #0d0c22;
+  box-shadow: 0 0 0 4px rgb(0 0 0 / 10%);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .form__animation {
+    position: fixed;
+    background: none;
+    right: 0;
+    bottom: 0;
+  }
+
+  .ball {
+    width: 100px;
+    height: 100px;
+    animation: roll_out 1s ease-out forwards;
+    transform: translate(103px, 0);
+  }
+
+  .ball__eyes {
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .ball__mouth {
+    width: 20px;
+    height: 20px;
+    margin: -1px auto;
+  }
+
+  .eye,
+  .eye_wrap {
+    width: 20px;
+    height: 20px;
+  }
+
+  .eye:before {
+    width: 10px;
+    height: 10px;
+  }
+
+  .ball__shadow {
+    display: none;
   }
 }

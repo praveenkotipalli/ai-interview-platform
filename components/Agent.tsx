@@ -147,9 +147,9 @@ const Agent = ({
 
   return (
     <>
-      <div className="call-view">
+      <div className="call-view ml-20">
         {/* AI Interviewer Card */}
-        <div className="card-interviewer">
+        <div className="card-interviewer ml-10">
           <div className="avatar">
             <Image
               src="/ai-avatar.png"

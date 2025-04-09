@@ -1,10 +1,9 @@
+// components/InterviewCard.tsx
 import dayjs from "dayjs";
 import Link from "next/link";
 import Image from "next/image";
-
 import { Button } from "./ui/button";
 import DisplayTechIcons from "./DisplayTechIcons";
-
 import { cn, getRandomInterviewCover } from "@/lib/utils";
 import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
 
@@ -28,70 +27,83 @@ const InterviewCard = async ({
 
   const badgeColor =
     {
-      Behavioral: "bg-light-400",
-      Mixed: "bg-light-600",
-      Technical: "bg-light-800",
-    }[normalizedType] || "bg-light-600";
+      Behavioral: "bg-blue-400",
+      Mixed: "bg-purple-400",
+      Technical: "bg-green-400",
+    }[normalizedType] || "bg-purple-400";
 
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now()
   ).format("MMM D, YYYY");
 
   return (
-    <div className="card-border w-[360px] max-sm:w-full min-h-96">
-      <div className="card-interview">
+    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-4 transition-all hover:translate-y-[-5px] hover:shadow-xl w-full max-w-[320px]">
+      <div className="flex flex-col h-full justify-between">
         <div>
           {/* Type Badge */}
           <div
             className={cn(
-              "absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg",
+              "absolute top-0 right-0 px-3 py-1 rounded-bl-lg rounded-tr-xl",
               badgeColor
             )}
           >
-            <p className="badge-text ">{normalizedType}</p>
+            <p className="text-white font-medium text-sm">{normalizedType}</p>
           </div>
 
           {/* Cover Image */}
-          <Image
-            src={getRandomInterviewCover()}
-            alt="cover-image"
-            width={90}
-            height={90}
-            className="rounded-full object-fit size-[90px]"
-          />
+          <div className="flex justify-center">
+            <Image
+              src={getRandomInterviewCover()}
+              alt="cover-image"
+              width={70}
+              height={70}
+              className="rounded-full object-cover w-[70px] h-[70px]"
+            />
+          </div>
 
           {/* Interview Role */}
-          <h3 className="mt-5 capitalize">{role} Interview</h3>
+          <h3 className="mt-4 text-lg font-bold capitalize text-center">
+            {role} Interview
+          </h3>
 
           {/* Date & Score */}
-          <div className="flex flex-row gap-5 mt-3">
-            <div className="flex flex-row gap-2">
+          <div className="flex flex-row justify-center gap-4 mt-3">
+            <div className="flex flex-row gap-2 items-center">
               <Image
                 src="/calendar.svg"
-                width={22}
-                height={22}
+                width={18}
+                height={18}
                 alt="calendar"
+                className="invert"
               />
-              <p>{formattedDate}</p>
+              <p className="text-sm">{formattedDate}</p>
             </div>
 
             <div className="flex flex-row gap-2 items-center">
-              <Image src="/star.svg" width={22} height={22} alt="star" />
-              <p>{feedback?.totalScore || "---"}/100</p>
+              <Image
+                src="/star.svg"
+                width={18}
+                height={18}
+                alt="star"
+                className="invert"
+              />
+              <p className="text-sm">{feedback?.totalScore || "---"}/100</p>
             </div>
           </div>
 
           {/* Feedback or Placeholder Text */}
-          <p className="line-clamp-2 mt-5">
+          <p className="line-clamp-2 mt-4 text-xs opacity-90 text-center">
             {feedback?.finalAssessment ||
               "You haven't taken this interview yet. Take it now to improve your skills."}
           </p>
         </div>
 
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-col items-center gap-3 mt-5">
           <DisplayTechIcons techStack={techstack} />
-
-          <Button className="btn-primary">
+          <Button
+            asChild
+            className="bg-white text-[#1a2980] rounded-full px-4 py-1 font-bold hover:bg-white/90 text-sm"
+          >
             <Link
               href={
                 feedback
