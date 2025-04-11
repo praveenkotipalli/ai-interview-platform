@@ -104,14 +104,14 @@ const AuthForm = ({ type }: { type: FormType }) => {
       <div className="flex items-center justify-center p-8 backdrop-blur-sm">
         <div className="w-full max-w-md bg-white/10 rounded-2xl p-8 backdrop-blur-lg border border-white/20">
           <div className="flex flex-row gap-2 justify-center mb-8">
-            <Image
+            {/* <Image
               src="/logo.svg"
               alt="logo"
               height={32}
               width={38}
               className="invert"
-            />
-            <h2 className="text-2xl font-bold text-white">PrepWise</h2>
+            /> */}
+            <h2 className="text-2xl font-bold text-white">Hirely</h2>
           </div>
 
           <h3 className="text-xl font-semibold text-center mb-8 text-white">

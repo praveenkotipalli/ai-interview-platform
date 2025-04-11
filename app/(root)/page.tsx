@@ -26,11 +26,12 @@ export default async function Home() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <header className="flex justify-between items-center mb-12">
+          {/* <title>Hirely</title> */}
           <div className="logo flex items-center gap-2 font-bold text-2xl">
             <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-[#1a2980]">
-              P
+              H
             </div>
-            PrepWise
+            Hirely
           </div>
           <Button
             asChild
